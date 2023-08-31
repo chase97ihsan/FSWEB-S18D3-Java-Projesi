@@ -1,0 +1,53 @@
+                                            ---SQL KODLARIM---
+
+1-SELECT o.ograd, o.ogrsoyad, i.atarih FROM ogrenci as o, islem as i WHERE o.ogrno = i.ogrno
+2-SELECT k.kitapadi, t.turadi FROM kitap as k , tur as t WHERE k.turno =  t.turno  AND  t.turadi  IN ('Hikaye', 'Fıkra')
+3-SELECT o.ograd, o.ogrsoyad, o.ogrno, k.kitapadi FROM ogrenci as o , islem as i , kitap as k WHERE o.ogrno = i.ogrno AND i.kitapno = k.kitapno AND o.sinif IN ('10A','10B')
+4-SELECT o.ograd, o.ogrsoyad, i.atarih FROM ogrenci as o INNER JOIN islem as i ON o.ogrno = i.ogrno
+5-SELECT k.kitapadi, t.turadi FROM kitap as k INNER JOIN tur as t ON k.turno = t.turno WHERE t.turadi IN ('Fıkra','Hikaye')
+6- SELECT o.ograd, o.ogrsoyad, o.ogrno, k.kitapadi FROM ogrenci as o INNER JOIN islem as i ON o.ogrno = i.ogrno INNER JOIN
+ kitap as k ON i.kitapno = k.kitapno
+ WHERE o.sinif IN ('10A','10B') ORDER BY o.ograd
+7-SELECT o.ograd, o.ogrsoyad, i.atarih FROM ogrenci as o LEFT JOIN islem as i ON o.ogrno = i.ogrno
+8-SELECT o.ograd, o.ogrsoyad FROM ogrenci as o LEFT JOIN islem as i ON o.ogrno = i.ogrno WHERE i.atarih IS NULL
+9- SELECT k.kitapadi, k.kitapno, count(k.kitapno) FROM islem as i INNER JOIN
+kitap as k ON i.kitapno = k.kitapno GROUP BY k.kitapadi, k.kitapno   ORDER BY k.kitapno
+10-   SELECT k.kitapadi, k.kitapno, count(i.kitapno) FROM islem as i  RIGHT JOIN kitap as k ON
+ i.kitapno = k.kitapno GROUP BY k.kitapadi, k.kitapno  ORDER BY count(k.kitapno)
+11-SELECT o.ograd, o.ogrsoyad, k.kitapadi FROM ogrenci as o INNER JOIN islem as i ON o.ogrno = i.ogrno INNER JOIN
+    kitap as k ON i.kitapno = k.kitapno
+12-SELECT  o.ograd, o.ogrsoyad, i.atarih,  k.kitapadi, y.yazarad, t.turadi  FROM ogrenci as o LEFT JOIN islem as i ON o.ogrno = i.ogrno LEFT JOIN
+    kitap as k ON i.kitapno = k.kitapno LEFT JOIN yazar as y ON k.yazarno = y.yazarno LEFT JOIN tur as t ON k.turno = t.turno
+13-SELECT o.ograd, o.ogrsoyad, COUNT(i.ogrno) FROM ogrenci as o INNER JOIN
+ islem as i ON o.ogrno = i.ogrno WHERE o.sinif IN ('10A','10B')  GROUP BY o.ograd, o.ogrsoyad
+14- select avg(k.sayfasayisi) from kitap as k
+//Sub query kullanarak çözdük 15. soruyu;
+15-select k.kitapadi, k.sayfasayisi from kitap as k where  k.sayfasayisi > (select avg(k.sayfasayisi) from kitap as k)
+16-select count(o.ogrno) from ogrenci as o
+17-select count(alias.ogrno) from ogrenci as alias
+18-select count(distinct o.ograd) from ogrenci as o
+19-select k.sayfasayisi from kitap as k where k.sayfasayisi = (select max(k.sayfasayisi) from kitap as k)
+20-select k.sayfasayisi, k.kitapadi from kitap as k where
+  k.sayfasayisi = (select max(k.sayfasayisi) from kitap as k) group by k.sayfasayisi, k.kitapadi
+21-select k.sayfasayisi from kitap as k where
+    k.sayfasayisi = (select min(k.sayfasayisi) from kitap as k)
+22-select k.sayfasayisi, k.kitapadi from kitap as k where
+     k.sayfasayisi = (select min(k.sayfasayisi) from kitap as k) group by k.sayfasayisi, k.kitapadi
+23- select max(k.sayfasayisi) from kitap as k inner join tur as t on k.turno = t.turno where t.turadi = 'Dram'
+24- select sum(k.sayfasayisi) from ogrenci as o inner join islem as i on o.ogrno = i.ogrno inner join kitap as k on i.kitapno = k.kitapno
+    where o.ogrno = 15
+25-select o.ograd, count(o.ograd) from ogrenci as o group by o.ograd
+26-select o.sinif, count(o.ogrno) from ogrenci as o group by o.sinif
+27-select o.sinif, o.cinsiyet, count(o.cinsiyet) from ogrenci as o group by o.sinif, o.cinsiyet
+28-select o.ograd, o.ogrsoyad, sum(k.sayfasayisi) from ogrenci as o inner join
+   islem as i on o.ogrno = i.ogrno inner join kitap as k on i.kitapno = k.kitapno
+   group by o.ograd, o.ogrsoyad order by sum(k.sayfasayisi)
+29-select o.ogrno, o.ograd, count(i.kitapno) from ogrenci as o inner join islem as i on o.ogrno = i.ogrno group by o.ogrno, o.ograd
+
+
+
+
+
+
+
+
